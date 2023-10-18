@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import Product from '../Components/Products'
+import NavLinks from '../Components/NavLinks';
+import Slider from '../Components/Slider';
 
 const Products = () => {
   const [products,setProducts] = useState({
@@ -28,6 +30,7 @@ const {data, isLoading} = products;
 
   return (
     <div className='product-list'>
+      <Slider/>
       <Product/>
     </div>
   );

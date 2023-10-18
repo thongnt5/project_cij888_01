@@ -1,8 +1,11 @@
 import React from 'react'
+import Slider from '../Components/Slider'
 
 const News = () => {
   return (
-    <div>Tin Tức</div>
+    <div>
+      <Slider/>
+    </div>
   )
 }
 

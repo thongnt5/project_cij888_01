@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Contact from "./pages/Contact";
 import News from "./pages/News";
+import Outstand from "./pages/Outstand";
 
 function App() {
   return (
@@ -21,7 +22,9 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/news" element ={<News/>}/>
+        <Route path="/outstand" element={<Outstand />} />
         <Route path="/contact" element={<Contact />} />
+       
       </Routes>
     </BrowserRouter>
    

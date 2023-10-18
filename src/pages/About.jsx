@@ -1,8 +1,11 @@
 import React from 'react'
+import Slider from '../Components/Slider'
 
 const About = () => {
   return (
-    <div>Giới thiệu</div>
+    <div>
+      <Slider/>
+    </div>
   )
 }
 

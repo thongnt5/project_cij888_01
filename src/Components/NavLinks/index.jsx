@@ -100,7 +100,7 @@ const NavLinks = () => {
                 <NavLink
                   to={"/contact"}
                   className={({ isActive }) =>
-                    isActive ? "active" : "menu-item"
+                    isActive ? "menu-active" : "menu-item"
                   }
                 >
                   Liên Hệ

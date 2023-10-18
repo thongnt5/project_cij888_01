@@ -1,8 +1,11 @@
 import React from 'react'
+import Slider from '../Components/Slider'
 
 const ProductDetail = () => {
   return (
-    <div>Chi Tiết Sản Phẩm</div>
+    <div>
+      <Slider/>
+    </div>
   )
 }
 

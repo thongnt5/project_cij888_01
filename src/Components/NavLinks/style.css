@@ -63,23 +63,24 @@
   margin-top: 10px;
 }
 .menu-content .menu-item:hover{
-    color: #cd9b32;
-    font-size: 18px;
-    font-weight: bold;
+    color: #cd9b32 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
     
 }
 .menu-content .menu-item{
-    margin-right: 18px;
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
+    margin-right: 18px !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    color: white !important;
 }
 .menu-active{
-    color: #cd9b32;
-    font-size: 25px;
-    font-weight: bold;
+    color: #cd9b32 !important;
+    font-size: 25px !important;
+    font-weight: bold !important;
     border-bottom: 2px solid #cd9b32 !important ;
+    
 }
 
 .menu-control{

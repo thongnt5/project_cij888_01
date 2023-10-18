@@ -1,8 +1,11 @@
 import React from 'react'
+import Slider from '../Components/Slider'
 
 const Contact = () => {
   return (
-    <div>Liên Hệ</div>
+    <div>
+      <Slider/>
+    </div>
   )
 }
 

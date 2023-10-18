@@ -21,11 +21,11 @@ const Product = () => {
 
   return (
     <div className="product-item">
-        {data?.map((item,index) => (
-            <div key={item.id_products}> 
-                <h2>{item.title}</h2>
+        {/*{data?.map((item,index) => (
+            <div key={item.id}> 
+               <h2>{item.title}</h2>
             </div>
-        ))}
+        ))}*/}
     </div>
     );
 };
