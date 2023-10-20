@@ -134,7 +134,7 @@ const Products = () => {
   };
   return (
     <>
-      <div className="product-list">{render()}</div>
+      <div className="product-list-all">{render()}</div>
       <div className="pagination-product">
         {pages.map((_, index) => (
           <Button className="index-pagination" key={index} onClick={() => handlePageChange(index + 1)}>

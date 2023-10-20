@@ -11,7 +11,7 @@
     margin-top: 20px;
 }
 
-.product-list {
+.product-list-all {
     position: relative;
     width: 100%;
     height: 100%;
@@ -20,8 +20,11 @@
     transition-property: transform;
     box-sizing: content-box;
     overflow: hidden;
+    margin-bottom: 25px;
 }
-
+.product-box:hover{
+    transform: scale(1.1);
+}
 .product-img img {
     width: 180px;
     height: 180px;
@@ -144,7 +147,7 @@
     display: none;
 }
 .index-pagination{
-    margin: 5px;
+    margin: 2px;
 }
 .pagination-product{
     text-align: center;
