@@ -20,6 +20,7 @@
     transition-property: transform;
     box-sizing: content-box;
     overflow: hidden;
+    overflow-x: auto;
 }
 
 .product-img img {
@@ -143,12 +144,7 @@
 .d-none {
     display: none;
 }
-.index-pagination{
-    margin: 5px;
-}
-.pagination-product{
-    text-align: center;
-}
+
 /*CSS responsive*/
 @media (max-width: 700px) {
    

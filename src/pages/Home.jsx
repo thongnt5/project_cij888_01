@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useEffect } from "react";
-import Product from "../Components/Products";
 import SliderMenu from "../Components/SliderMenu";
+import ProductsFalseSale from "../Components/ProductsFalseSale";
+import BestSaleProduct from "../Components/BestSaleProduct";
+import { Button } from "antd";
+import NewProduct from "../Components/NewProduct";
+import Products from "../Components/Products";
 
 const Home = () => {
   return (
@@ -80,7 +84,6 @@ const Home = () => {
                           Xem ngay
                         </a>
                       </h3>
-                     
                     </div>
                   </div>
                 </div>
@@ -98,7 +101,6 @@ const Home = () => {
                           Xem ngay
                         </a>
                       </h3>
-                     
                     </div>
                   </div>
                 </div>
@@ -116,7 +118,6 @@ const Home = () => {
                           Xem ngay
                         </a>
                       </h3>
-                     
                     </div>
                   </div>
                 </div>
@@ -134,18 +135,148 @@ const Home = () => {
                           Xem ngay
                         </a>
                       </h3>
-                     
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
 
+        <section className="section-flasale">
+          <div className="row">
+            <div className="col-12 flasale-flex">
+              <h3 className="title-flasale">
+                <a className="title-name" href="#" title="Bánh đang giảm giá">
+                  Bánh đang giảm giá
+                </a>
+                <br></br>
+                <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/title.png?1694745247263" />
+              </h3>
+              <div className="cout-down">
+                <span>
+                  Chương trình đã kết thúc, hẹn gặp lại trong thời gian sớm
+                  nhất!
+                </span>
+              </div>
+              <div className="products-flasale">
+                <ProductsFalseSale />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-bestsale">
+          <div className="row">
+            <div className="col-12 flasale-flex">
+              <h3 className="title-flasale">
+                <a className="title-name" href="#" title="Bánh đang giảm giá">
+                  Được bán nhiều nhất
+                </a>
+                <br></br>
+                <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/title.png?1694745247263" />
+              </h3>
+              <div className="cout-down" style={{ display: "none" }}>
+                <span>
+                  Chương trình đã kết thúc, hẹn gặp lại trong thời gian sớm
+                  nhất!
+                </span>
+              </div>
+              <div className="products-bestsale">
+                <BestSaleProduct />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-banner-1">
+          <div className="container">
+            <a className="thumb-image-banner" href="/" title="Banner">
+              <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/banner.jpg?1694745247263" />
+            </a>
+          </div>
+          <div className="tranfor"></div>
+        </section>
+
+        <section className="section-newproduct">
+          <div className="row">
+            <div className="col-12 flasale-flex">
+              <h3 className="title-flasale">
+                <a className="title-name" href="#" title="Bánh đang giảm giá">
+                  Bánh mới Nhất
+                </a>
+                <br></br>
+                <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/title.png?1694745247263" />
+              </h3>
+              <div className="cout-down" style={{ display: "none" }}>
+                <span>
+                  Chương trình đã kết thúc, hẹn gặp lại trong thời gian sớm
+                  nhất!
+                </span>
+              </div>
+              <div className="products-bestsale">
+                <NewProduct />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="section-banner-2">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="thumb-banner">
+                  <a href="#" title="Bánh nướng và sữa">
+                    <img
+                      src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/2banner_1.jpg?1694745247263"
+                      className="banner-left"
+                    />
+                  </a>
+                </div>
+                <div className="thumb-content">
+                  <h3 className="title">Bánh nướng & Sữa</h3>
+                  <p>Vị béo</p>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="thumb-banner">
+                  <a href="#" title="Bánh  và trà">
+                    <img
+                      src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/2banner_2.jpg?1694745247263"
+                      className="banner-right"
+                    />
+                  </a>
+                </div>
+                <div className="thumb-content">
+                  <h3 className="title">Bánh & Trà</h3>
+                  <p>Hương vị tươi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <section className="section-product">
-          <Product />
+          <div className="row">
+            <div className="col-12 flasale-flex">
+              <h3 className="title-flasale">
+                <a className="title-name" href="#" title="Bánh đang giảm giá">
+                  Tất cả bánh
+                </a>
+                <br></br>
+                <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/title.png?1694745247263" />
+              </h3>
+              <div className="cout-down" style={{ display: "none" }}>
+                <span>
+                  Chương trình đã kết thúc, hẹn gặp lại trong thời gian sớm
+                  nhất!
+                </span>
+              </div>
+              <div className="products-bestsale">
+                <Products />
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>
