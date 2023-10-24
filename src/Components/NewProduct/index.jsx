@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./style.css";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
@@ -86,9 +86,8 @@ const NewProduct = () => {
 
   //Event Slick
 
- 
-  
-    {/** 
+  {
+    /** 
 
      const [currentProductIndex, setCurrentProductIndex] = useState(0);
     //const [productLengt, setProductLengt] = useState(0);
@@ -112,7 +111,28 @@ const NewProduct = () => {
       const currentProduct = productsFalesale.data[currentProductIndex];
     }
   }
-  */}
+  */
+  }
+
+  const [cart, setCart] = useState(() => {
+    //Lay gio hang tu localStogory neu co hoac tra ve mang rong
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    //Luu gio hang vao localStorage moi khi no thay doi
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+  //Event button Cart
+  const addCart = (product) => {
+    setCart([...cart, product]);
+    //window.location.reload();
+  };
+
+  // Tính số lượng sản phẩm trong giỏ hàng
+  const cartItemCount = cart.length;
+
 
   let render = () => {
     if (productsFalesale.data != null) {
@@ -122,7 +142,9 @@ const NewProduct = () => {
             <div className="product-box" key={item.id}>
               <div className="product-img">
                 <div className="lable-flex">
-                  <div className={`discount ${item.discount != 0 ? "" : "d-none"}`}>
+                  <div
+                    className={`discount ${item.discount != 0 ? "" : "d-none"}`}
+                  >
                     <label>{`${item.discount}%`}</label>
                   </div>
                   <br></br>
@@ -157,7 +179,12 @@ const NewProduct = () => {
                     <Button onClick={() => onIncrease(item.id)}>+</Button>
                   </div>
                   <div className="btn-cart">
-                    <AiOutlineShoppingCart />
+                    <Button
+                      className="button-cart"
+                      onClick={() => addCart(item)}
+                    >
+                      <AiOutlineShoppingCart />
+                    </Button>
                   </div>
                 </div>
               </div>

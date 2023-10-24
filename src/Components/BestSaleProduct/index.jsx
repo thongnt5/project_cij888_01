@@ -114,6 +114,25 @@ const BestSaleProduct = () => {
   }
   */}
 
+  const [cart, setCart] = useState(() => {
+    //Lay gio hang tu localStogory neu co hoac tra ve mang rong
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    //Luu gio hang vao localStorage moi khi no thay doi
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+  //Event button Cart
+  const addCart = (product) => {
+    setCart([...cart, product]);
+    //window.location.reload();
+  };
+
+  // Tính số lượng sản phẩm trong giỏ hàng
+  const cartItemCount = cart.length;
+
   let render = () => {
     if (productsFalesale.data != null) {
       return productsFalesale.data.map((item) => {
@@ -157,7 +176,12 @@ const BestSaleProduct = () => {
                     <Button onClick={() => onIncrease(item.id)}>+</Button>
                   </div>
                   <div className="btn-cart">
-                    <AiOutlineShoppingCart />
+                  <Button
+                      className="button-cart"
+                      onClick={() => addCart(item)}
+                    >
+                      <AiOutlineShoppingCart />
+                    </Button>
                   </div>
                 </div>
               </div>

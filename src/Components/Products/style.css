@@ -174,7 +174,31 @@
 .pagination-product {
     text-align: center;
 }
-
+.btn-cart {
+    font-size: 23px;
+    color: white;
+    background-color: #cd9b32;
+    background: 10ppx;
+    width: 30px;
+    padding-bottom: -6px;
+    border-radius: 5px;
+    height: 29px;
+    cursor: grabbing;
+}
+.button-cart{
+    font-size: 23px;
+    color: white;
+    background-color: #cd9b32;
+    background: 10ppx;
+    width: 40px;
+    padding-bottom: -6px;
+    border-radius: 5px;
+    height: 29px;
+    cursor: grabbing;
+    border: none;
+    padding-left: 8px;
+    padding-top: 0px;
+}
 /*CSS responsive*/
 @media (max-width: 700px) {
     .products-product .product-list  .product-box {
@@ -352,5 +376,30 @@
     
     .pagination-product {
         text-align: center;
+    }
+    .btn-cart {
+        font-size: 23px;
+        color: white;
+        background-color: #cd9b32;
+        background: 10ppx;
+        width: 30px;
+        padding-bottom: -6px;
+        border-radius: 5px;
+        height: 29px;
+        cursor: grabbing;
+    }
+    .button-cart{
+        font-size: 23px;
+        color: white;
+        background-color: #cd9b32;
+        background: 10ppx;
+        width: 40px;
+        padding-bottom: -6px;
+        border-radius: 5px;
+        height: 29px;
+        cursor: grabbing;
+        border: none;
+        padding-left: 8px;
+        padding-top: 0px;
     }
 }

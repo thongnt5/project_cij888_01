@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavLinks from "./Components/NavLinks";
@@ -12,8 +12,10 @@ import News from "./pages/News";
 import Outstand from "./pages/Outstand";
 import NewsDetail from "./pages/NewsDetail";
 
+
 function App() {
   return (
+    
     <BrowserRouter>
     <NavLinks/>
       <Routes>

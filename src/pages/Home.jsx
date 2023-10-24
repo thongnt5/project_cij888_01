@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useEffect } from "react";
 import SliderMenu from "../Components/SliderMenu";
-import ProductsFalseSale from "../Components/ProductsFalseSale";
+import ProductsFalseSale, { CartContext } from "../Components/ProductsFalseSale";
 import BestSaleProduct from "../Components/BestSaleProduct";
 import { Button } from "antd";
 import NewProduct from "../Components/NewProduct";
@@ -11,6 +11,9 @@ import News from "../Components/News";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
+
+  //const {totalCart } = useContext(CartContext);
+  //console.log("12345"+ totalCart);
   return (
     <>
       <div className="bodywrap">

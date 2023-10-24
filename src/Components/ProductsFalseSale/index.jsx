@@ -1,16 +1,18 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import "./style.css";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { Button } from "antd";
 import _ from "lodash";
 
+export const CartContext = createContext(null);
+
+
 const ProductsFalseSale = () => {
   const [productsFalesale, setProductsFalesale] = useState({
     data: null,
     isLoading: false,
   });
-  const [newProductsFalesale, setNewProductsFalesale] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -36,13 +38,11 @@ const ProductsFalseSale = () => {
       productsFalesale.data,
       (item) => item.id === taskId
     );
-
     //2 tro den vi tri do va thay doi status
     if (findIndex != -1) {
       let newProductsFalesale = [...productsFalesale.data];
       newProductsFalesale[findIndex].product_quantity =
         newProductsFalesale[findIndex].product_quantity + 1;
-
       //3 set lai state de cap nhap lai giao dien
       setProductsFalesale({ data: newProductsFalesale, isLoading: false });
     }
@@ -65,54 +65,30 @@ const ProductsFalseSale = () => {
     }
   };
 
-  //Event Phân trang
-  {
-    /**
-  let itemsPerPage = 5;
+  const [cart, setCart] = useState(() => {
+    //Lay gio hang tu localStogory neu co hoac tra ve mang rong
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const pages = _.chunk(productsFalesale.data, itemsPerPage);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  useEffect(() => {
+    //Luu gio hang vao localStorage moi khi no thay doi
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+  //Event button Cart
+  const addCart = (product) => {
+    setCart([...cart, product]);
+    //window.location.reload();
   };
 
-  const paginatedProducts = pages[currentPage - 1];
- */
+  // Tính số lượng sản phẩm trong giỏ hàng
+  const cartItemCount = cart.length;
+
+  const totalCart = () =>{
+    return cartItemCount;
   }
-
-  // console.log(paginatedProducts);
-
-  //Event Slick
 
  
-  
-    {/** 
-
-     const [currentProductIndex, setCurrentProductIndex] = useState(0);
-    //const [productLengt, setProductLengt] = useState(0);
-
-    const handleNextClick = () => {
-      console.log(productsFalesale.data);
-      if (currentProductIndex < productsFalesale.data.length - 1) {
-        console.log(productsFalesale.data.length);
-        setCurrentProductIndex(currentProductIndex + 1);
-        setProductLengt(productsFalesale.data.length);
-      }
-    };
-
-    const handlePrevClick = () => {
-      if (currentProductIndex > 0) {
-        setCurrentProductIndex(currentProductIndex - 1);
-      }
-    };
-
-    if (productsFalesale.data != null) {
-      const currentProduct = productsFalesale.data[currentProductIndex];
-    }
-  }
-  */}
 
   let render = () => {
     if (productsFalesale.data != null) {
@@ -157,7 +133,12 @@ const ProductsFalseSale = () => {
                     <Button onClick={() => onIncrease(item.id)}>+</Button>
                   </div>
                   <div className="btn-cart">
-                    <AiOutlineShoppingCart />
+                    <Button
+                      className="button-cart"
+                      onClick={() => addCart(item)}
+                    >
+                      <AiOutlineShoppingCart />
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -169,24 +150,13 @@ const ProductsFalseSale = () => {
   };
 
   return (
-    <>
+    <CartContext.Provider
+      value={{
+        cartItemCount,
+      }}
+    >
       <div className="product-list-flase">{render()}</div>
-      {/** 
-       * <div className="slick-left">
-        <Button >
-          {"<"}
-        </Button>
-      </div>
-      <div className="slick-right">
-        <Button
-          
-          
-        >
-          {">"}
-        </Button>
-      </div>
-      */}
-    </>
+    </CartContext.Provider>
   );
 };
 
