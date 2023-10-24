@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Contact from "./pages/Contact";
 import News from "./pages/News";
 import Outstand from "./pages/Outstand";
+import NewsDetail from "./pages/NewsDetail";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/news" element ={<News/>}/>
+        <Route path="/news/:id" element={<NewsDetail />} />
         <Route path="/outstand" element={<Outstand />} />
         <Route path="/contact" element={<Contact />} />
        

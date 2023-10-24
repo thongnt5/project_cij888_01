@@ -297,7 +297,7 @@ body {
 
 
 .section-banner-1{
-  margin-top: 50px;
+  margin-top: 50px; 
 }
 .thumb-image-banner{
   position: relative;
@@ -368,7 +368,7 @@ body {
 .thumb-banner img:hover{
   
 
-  transform: scale(0.9);
+  transform: scale(1.1);
   height: auto;
   /* Giữ tỷ lệ khung hình */
   transition: transform 0.3s;
@@ -406,6 +406,76 @@ body {
   margin-bottom: 50px;
 }
 
+.section-about{
+  margin-top: 50px;
+}
+.thumb-content-left{
+  padding-right: 30px;
+  margin-bottom: 20px;
+} 
+.thumb-content-left .title{
+  font-size: 50px;
+  font-family: 'Playball';
+}
+.thumb-content-left .about-content{
+  text-align: justify;
+    display: block;
+    font-weight: 600;
+}
+
+.about-link{
+  margin-top: 25px;
+}
+.thumb-content-left .about-link a:hover{
+  text-decoration: none;
+  color:white;
+  background-color: #cd9b32;
+}
+.thumb-content-left .about-link a{
+  padding: 10px 15px;
+  border: 1px solid #000;
+  color: #000;
+  font-weight: 700;
+}
+
+.thumb-content-right{
+  padding-left: 30px;
+  margin-bottom: 20px;
+} 
+.thumb-content-right .title{
+  font-size: 50px;
+  font-family: 'Playball';
+}
+.thumb-content-right .about-content{
+  text-align: justify;
+    display: block;
+    font-weight: 600;
+}
+
+.about-link{
+  margin-top: 25px;
+}
+.thumb-content-right .about-link a:hover{
+  text-decoration: none;
+  color:white;
+  background-color: #cd9b32;
+}
+.thumb-content-right .about-link a{
+  padding: 10px 15px;
+  border: 1px solid #000;
+  color: #000;
+  font-weight: 700;
+
+}
+
+.thumb-image-banner a img{
+  width: 960px;
+  height: 300px;
+}
+
+.section-news{
+  margin-top: 50px;
+}
 /*CSS responsive*/
 @media (max-width: 700px) {
 
@@ -576,6 +646,8 @@ body {
     border-radius: 5px;
     margin-left: -18px;
     padding-left: 0px;
+    width: 413px;
+    margin-top: 25px;
 
   }
 
@@ -607,6 +679,7 @@ body {
   }
   .section-banner-1 img{
     width: 375px;
+    padding-left: 10px;
   }
 
 
@@ -621,6 +694,7 @@ body {
   .thumb-banner img{
     width: 400px;
     height: 270px;
+    margin-left: -33px;
   }
   .banner-left{
     margin-left: -28px;
@@ -666,7 +740,80 @@ body {
       font-size: 16px;
       font-weight: bold;
   }
+
+  .section-about{
+    margin-top: 50px;
+  }
+  .thumb-content-left{
+    padding-right: 30px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  } 
+  .thumb-content-left .title{
+    font-size: 37px;
+    font-family: 'Playball';
+  }
+  .thumb-content-left .about-content{
+    text-align: justify;
+      display: block;
+      font-weight: 600;
+  }
   
+  .about-link{
+    margin-top: 25px;
+  }
+  .thumb-content-left .about-link a:hover{
+    text-decoration: none;
+    color:white;
+    background-color: #cd9b32;
+  }
+  .thumb-content-left .about-link a{
+    padding: 10px 15px;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+  }
+  
+  .thumb-content-right{
+    padding-left: 30px;
+    margin-bottom: 20px;
+  } 
+  .thumb-content-right .title{
+    font-size: 37px;
+    font-family: 'Playball';
+  }
+  .thumb-content-right .about-content{
+    text-align: justify;
+      display: block;
+      font-weight: 600;
+  }
+  
+  .about-link{
+    margin-top: 25px;
+  }
+  .thumb-content-right .about-link a:hover{
+    text-decoration: none;
+    color:white;
+    background-color: #cd9b32;
+  }
+  .thumb-content-right .about-link a{
+    padding: 10px 15px;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: 700;
+  
+  }
+  
+  .thumb-image-banner a img{
+    width: 960px;
+    height: 300px;
+    margin-top: 18px;
+    margin-left: 10px;
+  }
+  .image-right{
+    display: none;
+  }
+
 }
 
 @media (min-width: 992px) {}

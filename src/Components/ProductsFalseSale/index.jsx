@@ -170,7 +170,7 @@ const ProductsFalseSale = () => {
 
   return (
     <>
-      <div className="product-list">{render()}</div>
+      <div className="product-list-flase">{render()}</div>
       {/** 
        * <div className="slick-left">
         <Button >

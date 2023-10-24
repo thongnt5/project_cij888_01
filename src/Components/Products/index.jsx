@@ -65,18 +65,17 @@ const Products = () => {
   };
 
   //Event Phân trang
-    let itemsPerPage = 5;
+  let itemsPerPage = 5;
 
-    const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const pages = _.chunk(productsFalesale.data, itemsPerPage);
+  const pages = _.chunk(productsFalesale.data, itemsPerPage);
 
-    const handlePageChange = (page) => {
-     setCurrentPage(page);
-   };
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
-    const paginatedProducts = pages[currentPage - 1];
-  
+  const paginatedProducts = pages[currentPage - 1];
 
   let render = () => {
     if (paginatedProducts != null) {
@@ -134,10 +133,15 @@ const Products = () => {
   };
   return (
     <>
-      <div className="product-list-all">{render()}</div>
+      <div className="product-list">{render()}</div>
+
       <div className="pagination-product">
         {pages.map((_, index) => (
-          <Button className="index-pagination" key={index} onClick={() => handlePageChange(index + 1)}>
+          <Button
+            className="index-pagination"
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+          >
             {index + 1}
           </Button>
         ))}
