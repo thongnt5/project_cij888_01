@@ -6,6 +6,7 @@ import { FaRegUser } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { CartContext } from "../ProductsFalseSale";
 import { Button } from "antd";
+import axios from "axios";
 
 const NavLinks = () => {
   //const {cartItemCount} = useContext(CartContext);
@@ -13,6 +14,10 @@ const NavLinks = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [previousMouseOver, setPreviousMouseOver] = useState(false);
+  const [productsLove, setProductsLove] = useState({
+    data: null,
+    isLoading: false,
+  });
 
   //Event xử lý showMenu
   useEffect(() => {
@@ -31,6 +36,30 @@ const NavLinks = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  //Event xử lý số lượng Product Loves
+  useEffect(() => {
+    (async () => {
+      setProductsLove((prev) => ({ ...prev, isLoading: true }));
+      const { data: _data } = await axios.get("http://localhost:3000/products");
+      setProductsLove({ data: _data, isLoading: false });
+    })();
+  }, []);
+
+  let countProductLove = 0;
+  const countLoveProduct = () => {
+    if (productsLove.data != null) {
+      productsLove.data.map((item) => {
+        if (item.product_like) {
+          countProductLove = countProductLove + 1;
+        }
+      });
+    }
+  };
+
+  countLoveProduct();   
+ // console.log(count);
+
 
   //Get cart from localStogary
   const [cart, setCart] = useState(() => {
@@ -52,6 +81,65 @@ const NavLinks = () => {
     }
   };
 
+  let totalPriceNumber = 0;
+  const totalPrice = () => {
+    cart.map((item) => {
+      let total = parseInt(
+        parseInt(item.product_quantity) * parseInt(item.price)
+      );
+      totalPriceNumber = totalPriceNumber + total;
+    });
+  };
+  //}, [cart]);
+  totalPrice();
+
+  // Hàm xóa phần tử khỏi mảng
+  const deleteItem = (index) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1); // Xóa phần tử tại vị trí index
+    setCart({ cart: newCart }); // Cập nhật state với mảng mới
+  };
+
+  let render = () => {
+    if (cart != null) {
+      return cart.map((item, index) => {
+        return (
+          <>
+            {" "}
+            <div className="cart-product" key={index}>
+              <div className="cart-img">
+                <NavLink to={`/products/${item.id}`} title={item.title}>
+                  <img src={item.images} />
+                </NavLink>
+              </div>
+              <div className="cart-infor">
+                <div className="cart-name">
+                  <NavLink
+                    to={`/products/${item.id}`}
+                    title={item.title}
+                    className="cart-ititle"
+                  >
+                    {item.title}
+                  </NavLink>
+                  <NavLink
+                    className="item-delete"
+                    onClick={() => deleteItem(index)}
+                  >
+                    Xóa
+                  </NavLink>
+                </div>
+                <br></br>
+                <div className="grid-price">
+                  <span className="cart-price">{`${item.product_quantity} x ${item.price}.000đ`}</span>
+                </div>
+              </div>
+            </div>
+            <hr></hr>
+          </>
+        );
+      });
+    }
+  };
   return (
     <>
       <div className={`menu-container ${showMenu ? "hSticky" : ""}`}>
@@ -149,7 +237,7 @@ const NavLinks = () => {
                 </NavLink>
               </div>
 
-              <span className="count-heart">0</span>
+              <span className="count-heart">{countProductLove}</span>
               <div className="icon " id="icon-cart">
                 <NavLink to={"/cart"} onMouseMove={handlerMouseEnter}>
                   {" "}
@@ -162,52 +250,29 @@ const NavLinks = () => {
         </div>
 
         <div
-          className={`list-cart ${isHovered ? "" : ""}`}
+          className={`list-cart ${isHovered ? "" : "d-none"}`}
           id="list-cart"
           onMouseLeave={handlerMouseLeave}
         >
-          <div className="cart-box">
-            {cart.map((item, index) => (
-              <> <div className="cart-product" key={index}>
-              <div className="cart-img">
-                <NavLink to={`/products/${item.id}`} title={item.title}>
-                  <img src={item.images} />
+          <div className="cart-box">{render()}</div>
+          <div className="total-price">
+            <div className="cart-total">
+              <span className="label-total">Tổng tiền: </span>
+
+              <span className="label-totalprice">{`${totalPriceNumber}.000đ`}</span>
+            </div>
+            <div className="cart-btn">
+              <div className="btn-viewcart">
+                <NavLink className="cart-lable" title="Giỏ hàng" to={"/cart"}>
+                  Giỏ Hàng
                 </NavLink>
               </div>
-              <div className="cart-infor">
-                <div className="cart-name">
-                  <NavLink
-                    to={`/products/${item.id}`}
-                    title={item.title}
-                    className="cart-ititle"
-                  >
-                    {item.title}
-                  </NavLink>
-                  <br></br>
-                  <NavLink className="item-delete">Xóa</NavLink>
-                </div>
-                <br></br>
-                <div className="gird-cart">
-                  <div className="gird-title">
-                    <label style={{ marginLeft: "-47px" }}>Số lượng</label>
-                    <div className="gird-qty">
-                      <Button onClick={() => onDecrease(item.id)}>-</Button>
-                      <label style={{ width: "30px" }}>
-                        {item.product_quantity}
-                      </label>
-                      <Button onClick={() => onIncrease(item.id)}>+</Button>
-                    </div>
-                  </div>
-                  <div className="grid-price">
-                    <span className="cart-price">{`${item.price}.000đ`}</span>
-                  </div>
-                </div>
+              <div className="btn-thanhtoan">
+                <NavLink className="cart-lable" title="Thanh Toán" to={"#"}>
+                  Thanh Toán
+                </NavLink>
               </div>
             </div>
-            <hr></hr>
-            </>
-             
-            ))}
           </div>
         </div>
       </div>

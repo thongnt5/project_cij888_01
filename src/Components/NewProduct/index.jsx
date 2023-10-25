@@ -65,55 +65,6 @@ const NewProduct = () => {
     }
   };
 
-  //Event Phân trang
-  {
-    /**
-  let itemsPerPage = 5;
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const pages = _.chunk(productsFalesale.data, itemsPerPage);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const paginatedProducts = pages[currentPage - 1];
- */
-  }
-
-  // console.log(paginatedProducts);
-
-  //Event Slick
-
-  {
-    /** 
-
-     const [currentProductIndex, setCurrentProductIndex] = useState(0);
-    //const [productLengt, setProductLengt] = useState(0);
-
-    const handleNextClick = () => {
-      console.log(productsFalesale.data);
-      if (currentProductIndex < productsFalesale.data.length - 1) {
-        console.log(productsFalesale.data.length);
-        setCurrentProductIndex(currentProductIndex + 1);
-        setProductLengt(productsFalesale.data.length);
-      }
-    };
-
-    const handlePrevClick = () => {
-      if (currentProductIndex > 0) {
-        setCurrentProductIndex(currentProductIndex - 1);
-      }
-    };
-
-    if (productsFalesale.data != null) {
-      const currentProduct = productsFalesale.data[currentProductIndex];
-    }
-  }
-  */
-  }
-
   const [cart, setCart] = useState(() => {
     //Lay gio hang tu localStogory neu co hoac tra ve mang rong
     const savedCart = localStorage.getItem("cart");
