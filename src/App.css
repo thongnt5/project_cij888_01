@@ -477,10 +477,57 @@ body {
   margin-top: 50px;
 }
 
+.table{
+  border: 1px solid #ebebeb;
+}
 .cartpcstyle{
   min-height: 300px;
   margin-right: 90px;
     margin-left: 90px;
+}
+.cart-title{
+  width: 530px;
+}
+.cart-qty, .cart-count,  .cart-sum{
+  width: 200px;
+}
+.infor-cart{
+  display: flex;
+  gap: 30px;
+}
+.title-cart a{
+  margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000;
+    line-height: 18px;
+    display: block;
+    margin-top: 30px;
+    margin-left: 0px;
+    text-decoration: none;
+}
+.title-cart a:hover{
+  margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #cd9b32;
+    line-height: 18px;
+    display: block;
+    margin-top: 30px;
+    margin-left: 0px;
+    text-decoration: none;
+}
+td img {
+  width: 90px;
+  height: 90px;
+}
+.td-action .item-delete{
+  padding-right: 11px;
+}
+.cart-none{
+  color: #cd9b32;
+  font-size: 16px;
+  font-weight: 700;
 }
 /*CSS responsive*/
 @media (max-width: 700px) {

@@ -13,6 +13,7 @@ import Outstand from "./pages/Outstand";
 import NewsDetail from "./pages/NewsDetail";
 import Heart from "./pages/Heart";
 import Cart from "./pages/Cart";
+import Payment from "./pages/Payment";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/outstand" element={<Outstand />} />
         <Route path="/heart" element={<Heart />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>

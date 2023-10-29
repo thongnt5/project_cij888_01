@@ -27,7 +27,7 @@ const Products = () => {
     <>
       <div className="product-list">
         <Slider title={"Tất cả sản phẩm"} />
-        <Product />
+        <Products />
       </div>
       <FooterList />
     </>

@@ -104,7 +104,7 @@ const NavLinks = () => {
     if (cart != null) {
       return cart.map((item, index) => {
         return (
-          <>
+          <div key={index}>
             {" "}
             <div className="cart-product" key={index}>
               <div className="cart-img">
@@ -135,7 +135,7 @@ const NavLinks = () => {
               </div>
             </div>
             <hr></hr>
-          </>
+          </div>
         );
       });
     }
@@ -254,7 +254,10 @@ const NavLinks = () => {
           id="list-cart"
           onMouseLeave={handlerMouseLeave}
         >
-          <div className="cart-box">{render()}</div>
+          <div className="cart-box">
+          <span className={`cart-none ${cart.length !=0 ?"d-none":""}`}>Không có sản phẩm nào trong giỏ hàng !</span>
+            {render()}
+            </div>
           <div className="total-price">
             <div className="cart-total">
               <span className="label-total">Tổng tiền: </span>
@@ -268,7 +271,7 @@ const NavLinks = () => {
                 </NavLink>
               </div>
               <div className="btn-thanhtoan">
-                <NavLink className="cart-lable" title="Thanh Toán" to={"#"}>
+                <NavLink className="cart-lable" title="Thanh Toán" to={"/payment"}>
                   Thanh Toán
                 </NavLink>
               </div>
