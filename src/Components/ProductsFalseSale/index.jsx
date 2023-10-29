@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import "./style.css";
-import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineShoppingCart,AiFillHeart } from "react-icons/ai";
 import { Button } from "antd";
 import _ from "lodash";
 
@@ -106,7 +106,8 @@ const ProductsFalseSale = () => {
                     <label>New</label>
                   </div>
                   <button className="icons-heart">
-                    <AiOutlineHeart />
+                    <div className={`${item.product_like ? "d-none":""}`}><AiOutlineHeart /></div>
+                    <div className={`${item.product_like ? "":"d-none"}`}><AiFillHeart /></div>
                   </button>
                 </div>
                 <a href={`/products/${item.id}`}>

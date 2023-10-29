@@ -11,6 +11,8 @@ import Contact from "./pages/Contact";
 import News from "./pages/News";
 import Outstand from "./pages/Outstand";
 import NewsDetail from "./pages/NewsDetail";
+import Heart from "./pages/Heart";
+import Cart from "./pages/Cart";
 
 
 function App() {
@@ -27,8 +29,9 @@ function App() {
         <Route path="/news" element ={<News/>}/>
         <Route path="/news/:id" element={<NewsDetail />} />
         <Route path="/outstand" element={<Outstand />} />
+        <Route path="/heart" element={<Heart />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
-       
       </Routes>
     </BrowserRouter>
    
