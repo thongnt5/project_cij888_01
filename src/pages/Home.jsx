@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useEffect } from "react";
 import SliderMenu from "../Components/SliderMenu";
-import ProductsFalseSale, { CartContext } from "../Components/ProductsFalseSale";
+import ProductsFalseSale from "../Components/ProductsFalseSale";
 import BestSaleProduct from "../Components/BestSaleProduct";
 import { Button } from "antd";
 import NewProduct from "../Components/NewProduct";
@@ -96,7 +96,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="col-xxl-2 col-lg-3 col-md-4 col-6  swiper-slide">
+                <div className="col-xxl-2 col-lg-3 col-md-4 col-6 ">
                   <div className="outstanding-box">
                     <div className="outstanding-img">
                       <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/danhmuc_2.jpg?1694745247263" />
@@ -113,7 +113,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="col-xxl-2 col-lg-3 col-md-4 col-6  swiper-slide">
+                <div className="col-xxl-2 col-lg-3 col-md-4 col-6 ">
                   <div className="outstanding-box">
                     <div className="outstanding-img">
                       <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/danhmuc_3.jpg?1694745247263" />
@@ -130,7 +130,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="col-xxl-2 col-lg-3 col-md-4 col-6  swiper-slide">
+                <div className="col-xxl-2 col-lg-3 col-md-4 col-6 ">
                   <div className="outstanding-box">
                     <div className="outstanding-img">
                       <img src="https://bizweb.dktcdn.net/100/492/035/themes/919334/assets/danhmuc_4.jpg?1694745247263" />

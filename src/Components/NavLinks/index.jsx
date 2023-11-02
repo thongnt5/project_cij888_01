@@ -4,20 +4,33 @@ import { NavLink } from "react-router-dom";
 import { BsSearch, BsCart3 } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
-import { CartContext } from "../ProductsFalseSale";
 import { Button } from "antd";
 import axios from "axios";
 
 const NavLinks = () => {
-  //const {cartItemCount} = useContext(CartContext);
-
   const [showMenu, setShowMenu] = useState(false);
+
   const [isHovered, setIsHovered] = useState(false);
   const [previousMouseOver, setPreviousMouseOver] = useState(false);
+
+  const [isHoveredProduct, setIsHoveredProduct] = useState(false);
+  const [previousMouseOverProduct, setPreviousMouseOverProduct] =
+    useState(false);
+
+  const [isHoveredLogin, setIsHoveredLogin] = useState(false);
+  const [previousMouseOverLogin, setPreviousMouseOverLogin] = useState(false);
+
   const [productsLove, setProductsLove] = useState({
     data: null,
     isLoading: false,
   });
+
+  const [category, setCategory] = useState({
+    data: null,
+    isLoading: false,
+  });
+
+  const [isLogin, setIsLogin] = useState(false);
 
   //Event xử lý showMenu
   useEffect(() => {
@@ -57,9 +70,8 @@ const NavLinks = () => {
     }
   };
 
-  countLoveProduct();   
- // console.log(count);
-
+  countLoveProduct();
+  // console.log(count);
 
   //Get cart from localStogary
   const [cart, setCart] = useState(() => {
@@ -81,6 +93,32 @@ const NavLinks = () => {
     }
   };
 
+  const handlerMouseEnterLogin = () => {
+    if (!isHoveredLogin) {
+      setIsHoveredLogin(true);
+      setPreviousMouseOverLogin(true);
+    }
+  };
+  const handlerMouseLeaveLogin = () => {
+    if (previousMouseOverLogin) {
+      setIsHoveredLogin(false);
+      setPreviousMouseOverLogin(false);
+    }
+  };
+
+  const handlerMouseEnterProduct = () => {
+    if (!isHoveredProduct) {
+      setIsHoveredProduct(true);
+      setPreviousMouseOverProduct(true);
+    }
+  };
+  const handlerMouseLeaveProduct = () => {
+    if (previousMouseOverProduct) {
+      setIsHoveredProduct(false);
+      setPreviousMouseOverProduct(false);
+    }
+  };
+
   let totalPriceNumber = 0;
   const totalPrice = () => {
     cart.map((item) => {
@@ -94,17 +132,17 @@ const NavLinks = () => {
   totalPrice();
 
   // Hàm xóa phần tử khỏi mảng
-  const deleteItem = (index) => {
-    const newCart = [...cart];
-    newCart.splice(index, 1); // Xóa phần tử tại vị trí index
-    setCart({ cart: newCart }); // Cập nhật state với mảng mới
+  const deleteItem = (cartId) => {
+    const updatedCart = cart.filter((cart) => cart.id !== cartId);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   let render = () => {
     if (cart != null) {
       return cart.map((item, index) => {
         return (
-          <div key={index}>
+          <div index={index} key={index}>
             {" "}
             <div className="cart-product" key={index}>
               <div className="cart-img">
@@ -123,7 +161,7 @@ const NavLinks = () => {
                   </NavLink>
                   <NavLink
                     className="item-delete"
-                    onClick={() => deleteItem(index)}
+                    onClick={() => deleteItem(item.id)}
                   >
                     Xóa
                   </NavLink>
@@ -140,6 +178,50 @@ const NavLinks = () => {
       });
     }
   };
+
+  //Get danh mục
+  useEffect(() => {
+    (async () => {
+      setCategory((prev) => ({ ...prev, isLoading: true }));
+      const { data: _data } = await axios.get("http://localhost:3000/category");
+      setCategory({ data: _data, isLoading: false });
+    })();
+  }, []);
+
+  let render_category = () => {
+    if (category.data != null) {
+      return category.data.map((item, index) => {
+        return (
+          <>
+            <div className="category-box" key={item.id}>
+              <NavLink to={`/category/${item.id}`}>
+                {item.name_category}
+              </NavLink>
+            </div>
+            <br></br>
+          </>
+        );
+      });
+    }
+  };
+
+  const userSesstion = sessionStorage.getItem("userSesstion");
+
+  if (userSesstion != null) {
+    useEffect(() => {
+      if (userSesstion.length > 0) {
+        setIsLogin(true);
+      }
+    }, []);
+  }
+
+  const deleteSecction = () => {
+    
+    setIsLogin(false);
+    sessionStorage.removeItem("userSesstion");
+    window.location.reload();
+  };
+
   return (
     <>
       <div className={`menu-container ${showMenu ? "hSticky" : ""}`}>
@@ -170,17 +252,6 @@ const NavLinks = () => {
                 </li>
                 <li className="menu-item">
                   <NavLink
-                    to={"/admin"}
-                    className={({ isActive }) =>
-                      isActive ? "menu-active" : "menu-item"
-                    }
-                    style={{ display: "none" }}
-                  >
-                    Admin
-                  </NavLink>
-                </li>
-                <li className="menu-item">
-                  <NavLink
                     to={"/about"}
                     className={({ isActive }) =>
                       isActive ? "menu-active" : "menu-item"
@@ -192,6 +263,7 @@ const NavLinks = () => {
                 <li className="menu-item">
                   <NavLink
                     to={"/products"}
+                    onMouseMove={handlerMouseEnterProduct}
                     className={({ isActive }) =>
                       isActive ? "menu-active" : "menu-item"
                     }
@@ -226,7 +298,12 @@ const NavLinks = () => {
                 <BsSearch style={{ fontSize: "25px" }} />
               </div>
               <div className="icon">
-                <FaRegUser style={{ fontSize: "25px" }} />
+                <NavLink
+                  className="icon-login"
+                  onMouseMove={handlerMouseEnterLogin}
+                >
+                  <FaRegUser style={{ fontSize: "25px" }} />
+                </NavLink>
               </div>
               <div className="icon">
                 <NavLink to={"/heart"}>
@@ -255,9 +332,11 @@ const NavLinks = () => {
           onMouseLeave={handlerMouseLeave}
         >
           <div className="cart-box">
-          <span className={`cart-none ${cart.length !=0 ?"d-none":""}`}>Không có sản phẩm nào trong giỏ hàng !</span>
+            <span className={`cart-none ${cart.length != 0 ? "d-none" : ""}`}>
+              Không có sản phẩm nào trong giỏ hàng !
+            </span>
             {render()}
-            </div>
+          </div>
           <div className="total-price">
             <div className="cart-total">
               <span className="label-total">Tổng tiền: </span>
@@ -271,11 +350,45 @@ const NavLinks = () => {
                 </NavLink>
               </div>
               <div className="btn-thanhtoan">
-                <NavLink className="cart-lable" title="Thanh Toán" to={"/payment"}>
+                <NavLink
+                 className={`cart-lable ${isLogin ? "d-none":""}` } to={"/login"}
+                  title="Thanh Toán"
+                >
+                  Thanh Toán
+                </NavLink>
+                <NavLink
+                className={`cart-lable ${isLogin ? "":"d-none"}` }
+                  title="Thanh Toán"
+                  to={"/payment"}
+                >
                   Thanh Toán
                 </NavLink>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div
+          className={`list-category ${isHoveredProduct ? "d-none" : "d-none"}`}
+          onMouseLeave={handlerMouseLeaveProduct}
+        >
+          {render_category()}
+        </div>
+
+        <div
+          className={`form-login ${isHoveredLogin ? "" : "d-none"}`}
+          onMouseLeave={handlerMouseLeaveLogin}
+        >
+          <div className="link-login">
+            <NavLink to={`${isLogin ? "/accont" : "/login"}`}>{`${
+              isLogin ? "Tài khoản" : "Đăng nhập"
+            }`}</NavLink>
+          </div>
+          <div className = "link-register">
+            <NavLink className={`${isLogin ? "d-none":""}` } to={"/register"} >
+              Đăng Ký
+            </NavLink>
+            <Button className={`${isLogin ? "link-register":"d-none"}`} onClick={() => deleteSecction()}>Đăng xuất</Button>
           </div>
         </div>
       </div>

@@ -4,11 +4,13 @@ import "./style.css";
 import { AiOutlineHeart, AiOutlineShoppingCart,AiFillHeart } from "react-icons/ai";
 import { Button } from "antd";
 import _ from "lodash";
+import { NavLink } from "react-router-dom";
 
-export const CartContext = createContext(null);
+export const CountContext = createContext();
 
 
 const ProductsFalseSale = () => {
+
   const [productsFalesale, setProductsFalesale] = useState({
     data: null,
     isLoading: false,
@@ -75,20 +77,13 @@ const ProductsFalseSale = () => {
     //Luu gio hang vao localStorage moi khi no thay doi
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
   //Event button Cart
   const addCart = (product) => {
     setCart([...cart, product]);
-    //window.location.reload();
+    window.location.reload();
   };
 
-  // Tính số lượng sản phẩm trong giỏ hàng
-  const cartItemCount = cart.length;
-
-  const totalCart = () =>{
-    return cartItemCount;
-  }
-
- 
 
   let render = () => {
     if (productsFalesale.data != null) {
@@ -139,7 +134,7 @@ const ProductsFalseSale = () => {
                       onClick={() => addCart(item)}
                     >
                       <AiOutlineShoppingCart />
-                    </Button>
+                  </Button>
                   </div>
                 </div>
               </div>
@@ -151,13 +146,10 @@ const ProductsFalseSale = () => {
   };
 
   return (
-    <CartContext.Provider
-      value={{
-        cartItemCount,
-      }}
+    <
     >
       <div className="product-list-flase">{render()}</div>
-    </CartContext.Provider>
+    </>
   );
 };
 

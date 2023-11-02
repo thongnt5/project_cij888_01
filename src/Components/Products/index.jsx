@@ -6,7 +6,7 @@ import {
   AiOutlineShoppingCart,
   AiFillHeart,
 } from "react-icons/ai";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import _ from "lodash";
 
 const Products = () => {
@@ -92,10 +92,16 @@ const Products = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
   //Event button Cart
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState("");
+  const [modalImg, setModalImg] = useState("");
+
   const addCart = (product) => {
     setCart([...cart, product]);
-    //window.location.reload();
+    window.location.reload();
   };
+  
 
   // Tính số lượng sản phẩm trong giỏ hàng
   const cartItemCount = cart.length;
@@ -161,6 +167,7 @@ const Products = () => {
       });
     }
   };
+
   return (
     <>
       <div className="product-list">{render()}</div>
@@ -176,6 +183,7 @@ const Products = () => {
           </Button>
         ))}
       </div>
+
     </>
   );
 };

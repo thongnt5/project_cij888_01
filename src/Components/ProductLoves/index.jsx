@@ -78,7 +78,7 @@ const ProductLoves = () => {
   //Event button Cart
   const addCart = (product) => {
     setCart([...cart, product]);
-    //window.location.reload();
+    window.location.reload();
   };
 
   // Tính số lượng sản phẩm trong giỏ hàng

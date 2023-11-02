@@ -113,6 +113,7 @@
 
 .product-detail .price-box {
     display: inline-flex;
+    width: 150px;
 }
 
 .product-detail .price-box .price-new {

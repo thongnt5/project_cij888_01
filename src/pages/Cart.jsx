@@ -19,18 +19,18 @@ const Cart = () => {
         parseInt(item.product_quantity) * parseInt(item.price)
       );
       totalPriceNumber = totalPriceNumber + total;
-      console.log(totalPriceNumber);
     });
   };
   //}, [cart]);
   totalPrice();
 
   // Hàm xóa phần tử khỏi mảng
-  const deleteItem = (index) => {
-    const newCart = [...cart];
-    newCart.splice(index, 1); // Xóa phần tử tại vị trí index
-    setCart({ cart: newCart }); // Cập nhật state với mảng mới
+   const deleteItem = (cartId) => {
+    const updatedCart = cart.filter((cart) => cart.id !== cartId);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
+
   //Ham tim vi tri index
   function findIndexInList(list, conditionFn) {
     for (let i = 0; i < list.length; i++) {
@@ -52,7 +52,8 @@ const Cart = () => {
         newcart[findIndex].product_quantity + 1;
 
       //3 set lai state de cap nhap lai giao dien
-      setCart({ newcart });
+      setCart(newcart);
+      localStorage.setItem('cart', JSON.stringify(newcart));
     }
   };
 
@@ -62,11 +63,14 @@ const Cart = () => {
     //2 tro den vi tri do va thay doi status
     if (findIndex != -1) {
       let newcart = [...cart];
+      if (newcart[findIndex].product_quantity > 1) {
       newcart[findIndex].product_quantity =
         newcart[findIndex].product_quantity - 1;
-
+        
       //3 set lai state de cap nhap lai giao dien
-      setCart({ newcart });
+      setCart(newcart);
+      localStorage.setItem('cart', JSON.stringify(newcart));
+      }
     }
   };
   let render = () => {
@@ -91,7 +95,7 @@ const Cart = () => {
                   </NavLink>
                 </div>
               </td>
-              <td className="qty-cart">{`${item.price}.000đ`}</td>
+              <td className="qty-cart item-color">{`${item.price}.000đ`}</td>
               <td className="number-cart">
                 <div className="counter-number">
                   <Button onClick={() => onDecrease(item.id)}>-</Button>
@@ -99,13 +103,13 @@ const Cart = () => {
                   <Button onClick={() => onIncrease(item.id)}>+</Button>
                 </div>
               </td>
-              <td>{`${
+              <td className="item-color">{`${
                 parseInt(item.product_quantity) * parseInt(item.price)
               }.000đ`}</td>
               <td className="td-action">
                 <NavLink
                   className="item-delete"
-                  onClick={() => deleteItem(index)}
+                  onClick={() => deleteItem(item.id)}
                 >
                   Xóa
                 </NavLink>
@@ -122,6 +126,13 @@ const Cart = () => {
         <Slider title="Giỏ hàng" />
       </div>
       <div className="content ">
+        <div className="title-home">
+          <NavLink to={"/"} title="Trang chủ">
+            Trang chủ
+          </NavLink>
+          <span>{">"}</span>
+          <label>Giỏ hàng</label>
+        </div>
         <div className="cart-content d-none">
           <h3 className="title-flasale">
             <a className="title-name" href="#" title="Bánh đang giảm giá">
@@ -133,7 +144,7 @@ const Cart = () => {
         </div>
         <div className="container cartpcstyle">
           <div className="row">
-            <div className="col-xl-8 col-lg-8 col-12 col-cart-left">
+            <div className="col-12">
               <div className="cart-page">
                 <table className="table">
                   <thead>
@@ -141,13 +152,13 @@ const Cart = () => {
                       <th scope="col" className="cart-title">
                         Thông tin sản phẩm
                       </th>
-                      <th scope="col" className="cart-qty">
+                      <th scope="col" className="cart-qty item-center">
                         Đơn giá
                       </th>
-                      <th scope="col" className="cart-count">
+                      <th scope="col" className="cart-count ">
                         Số lượng
                       </th>
-                      <th scope="col" className="cart-sum">
+                      <th scope="col" className="cart-sum item-center">
                         Thành tiền{" "}
                       </th>
                       <th scope="col" className="cart-action">
@@ -156,17 +167,34 @@ const Cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                      <span className={`cart-none ${cart.length !=0 ?"d-none":""}`}>Không có sản phẩm nào trong giỏ hàng !</span>
-                  
-                      {render()}</tbody>
+                    <td key = {cart.id}
+                      className={`cart-none ${
+                        cart.length != 0 ? "d-none" : ""
+                      }`}
+                    >
+                      Không có sản phẩm nào trong giỏ hàng !
+                    </td>
+
+                    {render()}
+                  </tbody>
                 </table>
               </div>
-              <div className="cart-sum-price">
-                <label>Tổng tiền: </label>
-                <span className="label-totalprice">{`${totalPriceNumber}.000đ`}</span>
+              <div className="payment-infor">
+                <div className="cart-sum-price">
+                  <label>Tổng tiền: </label>
+                  <span className="label-totalprice">{`${totalPriceNumber}.000đ`}</span>
+                </div>
+                <div className="btn-payment">
+                  <NavLink
+                    className="cart-lable"
+                    title="Thanh Toán"
+                    to={"/payment"}
+                  >
+                    Thanh Toán
+                  </NavLink>
+                </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-4 col-12 col-cart-right">BBBB</div>
           </div>
         </div>
       </div>
